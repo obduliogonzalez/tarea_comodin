@@ -44,7 +44,7 @@ dato_nuevo <- data.frame(PEI3 = 2, PEI4 = 40, PEI5 = 2000, AREA = 2)
 prediccion_nueva <- predict(bosque, dato_nuevo)
 
 # Mostrar las predicciones
-print(predicciones)
+# print(predicciones)
 
 # Opcional: Ver las predicciones en una vista de datos (solo en RStudio o R GUI)
 View(predicciones)
@@ -77,4 +77,20 @@ ggplot(pred_df, aes(x = Real, fill = Predicho)) +
   theme_minimal() +
   labs(title = "Distribución de Predicciones por Clase", x = "Clase Real", y = "Frecuencia")
 
+
+library(pROC)
+roc_curve <- roc(test$DEPARTAMENTO, as.numeric(predicciones))
+plot(roc_curve, col = "darkorange", main = "Curva ROC", print.auc = TRUE)
+
+
+# Generar datos nuevos y predecir
+nuevo_df <- data.frame(PEI3 = seq(1, 10, by = 1), PEI4 = seq(20, 200, by = 20), PEI5 = seq(500, 2000, by = 150), AREA = 2)
+predicciones_nuevas <- predict(bosque, nuevo_df)
+
+# Gráfico de las predicciones
+nuevo_df$Prediccion <- predicciones_nuevas
+ggplot(nuevo_df, aes(x = PEI3, y = PEI5, color = Prediccion)) +
+  geom_point(size = 4) +
+  labs(title = "Predicciones en Datos Nuevos", x = "PEI3", y = "PEI5") +
+  theme_minimal()
 

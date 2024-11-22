@@ -44,7 +44,7 @@ dato_nuevo <- data.frame(PEI3 = 2, PEI4 = 40, PEI5 = 2000, AREA = 2)
 prediccion_nueva <- predict(bosque, dato_nuevo)
 
 # Mostrar las predicciones
-print(predicciones)
+# print(predicciones)
 
 # Opcional: Ver las predicciones en una vista de datos (solo en RStudio o R GUI)
 View(predicciones)
@@ -56,25 +56,4 @@ View(prediccion_nueva)
 View(migracion)
 View(train)
 View(test)
-
-# Importancia de las variables
-importancia <- importance(bosque) # Calcula la importancia de las variables
-barplot(importancia[, 1], main = "Importancia de las Variables", horiz = TRUE, col = "steelblue", las = 1)
-
-# Gráfico de error del modelo
-plot(bosque, main = "Error del Modelo vs Número de Árboles")
-
-# Matriz de confusión
-confusion_matrix <- table(test$DEPARTAMENTO, predicciones)
-print(confusion_matrix)
-
-
-# Gráfico de predicciones por clase
-library(ggplot2)
-pred_df <- data.frame(Real = test$DEPARTAMENTO, Predicho = predicciones)
-ggplot(pred_df, aes(x = Real, fill = Predicho)) +
-  geom_bar(position = "dodge") +
-  theme_minimal() +
-  labs(title = "Distribución de Predicciones por Clase", x = "Clase Real", y = "Frecuencia")
-
 

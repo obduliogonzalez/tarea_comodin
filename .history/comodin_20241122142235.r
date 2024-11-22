@@ -44,7 +44,7 @@ dato_nuevo <- data.frame(PEI3 = 2, PEI4 = 40, PEI5 = 2000, AREA = 2)
 prediccion_nueva <- predict(bosque, dato_nuevo)
 
 # Mostrar las predicciones
-print(predicciones)
+# print(predicciones)
 
 # Opcional: Ver las predicciones en una vista de datos (solo en RStudio o R GUI)
 View(predicciones)
@@ -69,12 +69,6 @@ confusion_matrix <- table(test$DEPARTAMENTO, predicciones)
 print(confusion_matrix)
 
 
-# Gráfico de predicciones por clase
-library(ggplot2)
-pred_df <- data.frame(Real = test$DEPARTAMENTO, Predicho = predicciones)
-ggplot(pred_df, aes(x = Real, fill = Predicho)) +
-  geom_bar(position = "dodge") +
-  theme_minimal() +
-  labs(title = "Distribución de Predicciones por Clase", x = "Clase Real", y = "Frecuencia")
+
 
 
